@@ -1,10 +1,11 @@
 const JWT = require("jsonwebtoken");
 
-const secret = "SLMV142620";
+const secret = "$uperMan@123";
 
-function createToken(user) {
+function createTokenForUser(user) {
   const payload = {
-    id: user._id,
+    _id: user._id,
+    fullName: user.fullName,
     email: user.email,
     profileImageURL: user.profileImageURL,
     role: user.role,
@@ -13,12 +14,12 @@ function createToken(user) {
   return token;
 }
 
-function validate(token) {
+function validateToken(token) {
   const payload = JWT.verify(token, secret);
   return payload;
 }
 
 module.exports = {
-  createToken,
-  validate,
+  createTokenForUser,
+  validateToken,
 };

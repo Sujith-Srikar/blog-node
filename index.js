@@ -1,3 +1,5 @@
+require("dotenv").config();
+
 const express = require("express");
 const path = require("path");
 const mongoose = require("mongoose");
@@ -9,10 +11,10 @@ const Blog = require("./models/blog");
 
 
 const app = express();
-const PORT = 8000;
+const PORT = process.env.PORT;
 
 mongoose
-  .connect("mongodb://127.0.0.1:27017/blogapp") // instead of localhost use (127.0.0.1)
+  .connect(process.env.MONGO_URL) // instead of localhost use (127.0.0.1)
   .then(() => console.log("Connected to MongoDB"))
   .catch((err) => console.log("MongoDB connection error:", err));
 

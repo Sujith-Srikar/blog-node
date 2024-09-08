@@ -3,26 +3,53 @@
   <head>
     <%- include('./partials/head') %>
     <title>Homepage</title>
+    <style>
+    .container {
+      margin-top: 30px;
+    }
+    .card {
+      margin-bottom: 20px;
+      transition: transform 0.2s;
+    }
+    .card:hover {
+      transform: scale(1.05);
+    }
+    .card-img-top {
+      height: 200px;
+      object-fit: cover;
+    }
+    .no-blogs-message {
+      text-align: center;
+      font-size: 1.5rem;
+      color: #777;
+      margin-top: 20px;
+    }
+  </style>
   </head>
   <body>
     <%- include('./partials/nav') %>
 
     <div class="container mt-3">
-      <div class="row row-cols-4">
+    <% if (blogs.length === 0) { %>
+      <p class="no-blogs-message">No blogs available.</p>
+    <% } else { %>
+      <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
         <% blogs.forEach(blog => { %>
-        <div class="col">
-          <div class="card col" style="width: 18rem">
-            <img src="<%= blog.profileImgURL %>" class="card-img-top" />
-            <div class="card-body">
-              <h5 class="card-title"><%= blog.title %></h5>
-              <a href="/blog/<%= blog._id %>" class="btn btn-primary">View</a>
+          <div class="col">
+            <div class="card" style="width: 18rem">
+              <img src="<%= blog.coverImageURL %>" alt="coverImageURL" class="card-img-top" />
+              <div class="card-body">
+                <h5 class="card-title"><%= blog.title %></h5>
+                <a href="/blog/<%= blog._id %>" class="btn btn-primary">View</a>
+              </div>
             </div>
           </div>
-        </div>
         <% }) %>
       </div>
-    </div>
+    <% } %>
+  </div>
 
-    <%- include('./partials/script') %>
+
+    <%- include('./partials/scripts') %>
   </body>
 </html>
